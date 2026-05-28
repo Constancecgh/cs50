@@ -931,6 +931,239 @@ footer span{color:var(--crimson);}
 
   body.dark .quiz-wrap { background: #0a0806; }
 
+
+  /* ── SEARCH ── */
+  .search-overlay {
+    position:fixed;inset:0;z-index:900;
+    background:rgba(10,8,6,0.92);
+    display:none;align-items:flex-start;justify-content:center;
+    padding-top:80px;
+    backdrop-filter:blur(4px);
+  }
+  .search-overlay.open { display:flex; }
+
+  .search-box {
+    width:100%;max-width:660px;
+    margin:0 20px;
+    animation:searchIn 0.2s ease;
+  }
+  @keyframes searchIn {
+    from{opacity:0;transform:translateY(-16px)}
+    to  {opacity:1;transform:translateY(0)}
+  }
+
+  .search-input-wrap {
+    display:flex;align-items:center;gap:12px;
+    background:#1a1410;border:2px solid var(--gold);
+    border-radius:14px;padding:14px 18px;
+    box-shadow:0 8px 40px rgba(0,0,0,0.6);
+  }
+  .search-icon { font-size:20px;flex-shrink:0; }
+  .search-input {
+    flex:1;background:none;border:none;outline:none;
+    font-family:'Libre Baskerville',Georgia,serif;
+    font-size:18px;color:white;
+  }
+  .search-input::placeholder { color:rgba(255,255,255,0.3); }
+  .search-close {
+    background:rgba(255,255,255,0.08);border:none;
+    color:rgba(255,255,255,0.5);border-radius:6px;
+    font-family:'Source Code Pro',monospace;font-size:11px;
+    padding:4px 8px;cursor:pointer;flex-shrink:0;
+    transition:all 0.15s;
+  }
+  .search-close:hover{background:rgba(255,255,255,0.15);color:white;}
+
+  .search-results {
+    margin-top:10px;
+    background:#1a1410;border-radius:12px;
+    border:1.5px solid rgba(255,255,255,0.08);
+    max-height:460px;overflow-y:auto;
+    box-shadow:0 8px 40px rgba(0,0,0,0.5);
+  }
+  .search-results:empty { display:none; }
+
+  .search-empty {
+    padding:24px;text-align:center;
+    font-family:'Source Code Pro',monospace;
+    font-size:13px;color:rgba(255,255,255,0.35);
+  }
+
+  .search-group { border-bottom:1px solid rgba(255,255,255,0.06); }
+  .search-group:last-child { border-bottom:none; }
+  .search-group-label {
+    padding:10px 18px 6px;
+    font-family:'Source Code Pro',monospace;
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    color:rgba(255,255,255,0.3);
+  }
+
+  .search-result-item {
+    display:flex;align-items:center;gap:14px;
+    padding:12px 18px;cursor:pointer;
+    transition:background 0.12s;
+  }
+  .search-result-item:hover,
+  .search-result-item.active {
+    background:rgba(201,168,76,0.12);
+  }
+  .sri-week {
+    font-family:'Source Code Pro',monospace;
+    font-size:11px;font-weight:700;
+    background:var(--crimson);color:white;
+    border-radius:5px;padding:2px 7px;
+    flex-shrink:0;white-space:nowrap;
+  }
+  .sri-content { flex:1;min-width:0; }
+  .sri-title {
+    font-family:'Libre Baskerville',serif;
+    font-size:14px;color:white;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .sri-title mark {
+    background:rgba(201,168,76,0.35);color:var(--gold);
+    border-radius:3px;padding:0 2px;
+  }
+  .sri-section {
+    font-family:'Source Code Pro',monospace;
+    font-size:11px;color:rgba(255,255,255,0.35);
+    margin-top:2px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .sri-arrow { color:rgba(255,255,255,0.2);font-size:14px;flex-shrink:0; }
+
+  .search-hint {
+    padding:12px 18px;
+    display:flex;gap:16px;flex-wrap:wrap;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .search-hint span {
+    font-family:'Source Code Pro',monospace;
+    font-size:11px;color:rgba(255,255,255,0.25);
+    display:flex;align-items:center;gap:5px;
+  }
+  .search-hint kbd {
+    background:rgba(255,255,255,0.08);
+    border-radius:4px;padding:2px 6px;
+    color:rgba(255,255,255,0.4);
+    font-family:'Source Code Pro',monospace;font-size:10px;
+  }
+
+  /* Search trigger button in nav */
+  .search-trigger {
+    display:flex;align-items:center;gap:7px;
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:8px;padding:6px 12px;
+    color:rgba(255,255,255,0.5);
+    font-family:'Source Code Pro',monospace;font-size:12px;
+    cursor:pointer;transition:all 0.15s;
+    margin-left:8px;white-space:nowrap;flex-shrink:0;
+  }
+  .search-trigger:hover{
+    background:rgba(255,255,255,0.12);
+    border-color:rgba(255,255,255,0.3);
+    color:white;
+  }
+  .search-trigger kbd {
+    background:rgba(255,255,255,0.1);border-radius:4px;
+    padding:1px 5px;font-size:10px;
+    color:rgba(255,255,255,0.4);
+  }
+
+
+  .search-pill {
+    font-family:'Source Code Pro',monospace;font-size:11px;
+    background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);
+    border-radius:20px;padding:5px 13px;cursor:pointer;
+    transition:all 0.15s;border:1px solid rgba(255,255,255,0.08);
+  }
+  .search-pill:hover {
+    background:rgba(201,168,76,0.18);color:var(--gold);
+    border-color:rgba(201,168,76,0.3);
+  }
+
+
+  /* ── BACKUP / RESTORE ── */
+  .backup-bar {
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    margin-top:14px;padding-top:14px;
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .backup-label {
+    font-family:'Source Code Pro',monospace;
+    font-size:10px;letter-spacing:2px;text-transform:uppercase;
+    color:rgba(255,255,255,0.3);flex-shrink:0;
+  }
+  .backup-btn {
+    background:rgba(255,255,255,0.07);
+    border:1.5px solid rgba(255,255,255,0.15);
+    border-radius:8px;padding:7px 14px;
+    font-family:'Source Code Pro',monospace;
+    font-size:11px;font-weight:700;
+    color:rgba(255,255,255,0.65);
+    cursor:pointer;transition:all 0.15s;
+    display:flex;align-items:center;gap:6px;
+  }
+  .backup-btn:hover {
+    background:rgba(201,168,76,0.15);
+    border-color:var(--gold);color:var(--gold);
+  }
+  .backup-btn.import-btn:hover {
+    background:rgba(76,175,80,0.15);
+    border-color:#4CAF50;color:#4CAF50;
+  }
+  .backup-toast {
+    font-family:'Source Code Pro',monospace;
+    font-size:11px;color:#4CAF50;
+    display:none;
+  }
+  .backup-toast.show { display:inline; }
+
+
+  /* ── EXPORT / IMPORT ── */
+  .save-bar {
+    max-width:860px;margin:0 auto;
+    padding:0 24px 20px;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .save-label {
+    font-family:'Source Code Pro',monospace;
+    font-size:11px;color:rgba(255,255,255,0.4);
+    letter-spacing:1px;text-transform:uppercase;
+    flex:1;min-width:120px;
+  }
+  .save-btn {
+    display:flex;align-items:center;gap:7px;
+    font-family:'Source Code Pro',monospace;
+    font-size:12px;font-weight:700;
+    padding:9px 16px;border-radius:8px;
+    cursor:pointer;border:none;
+    transition:all 0.15s;letter-spacing:0.5px;
+  }
+  .save-btn.export {
+    background:var(--green);color:white;
+  }
+  .save-btn.export:hover{background:#235a40;transform:translateY(-1px);}
+  .save-btn.import {
+    background:rgba(255,255,255,0.08);
+    color:rgba(255,255,255,0.7);
+    border:1.5px solid rgba(255,255,255,0.15);
+  }
+  .save-btn.import:hover{background:rgba(255,255,255,0.14);color:white;}
+  .save-toast {
+    position:fixed;bottom:100px;left:50%;
+    transform:translateX(-50%);
+    background:var(--green);color:white;
+    border-radius:30px;padding:10px 22px;
+    font-family:'Source Code Pro',monospace;
+    font-size:13px;font-weight:700;
+    z-index:700;box-shadow:0 4px 20px rgba(0,0,0,0.4);
+    display:none;white-space:nowrap;
+  }
+  .save-toast.show{display:block;animation:toastIn 0.2s ease;}
+  #importFile{display:none;}
+
 </style>
 </head>
 <body>
@@ -952,7 +1185,7 @@ footer span{color:var(--crimson);}
       <button class="nav-tab" onclick="showPage('week8')">Week 8 — HTML/CSS/JS</button>
       <button class="nav-tab" onclick="showPage('week9')">Week 9 — Flask</button>
       <button class="nav-tab" onclick="showPage('checklist')">✅ Ma Progression</button>
-    </div>
+      </div>
   </div>
 </nav>
 
@@ -967,6 +1200,29 @@ footer span{color:var(--crimson);}
     </div>
     <div class="hero-bar"></div>
   </div>
+
+  <!-- HOME SEARCH BAR -->
+  <div style="background:var(--dark);padding:32px 24px 36px;">
+    <div style="max-width:620px;margin:0 auto;">
+      <div style="font-family:'Source Code Pro',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);text-align:center;margin-bottom:16px;">Recherche instantanée dans tout le cours</div>
+      <div style="display:flex;align-items:center;gap:12px;background:#1a1410;border:2px solid var(--gold);border-radius:14px;padding:14px 20px;box-shadow:0 4px 24px rgba(0,0,0,0.4);cursor:text;" onclick="searchOpen()">
+        <span style="font-size:20px;">🔍</span>
+        <span style="font-family:'Libre Baskerville',serif;font-size:17px;color:rgba(255,255,255,0.35);flex:1;">Cherche un concept… malloc, JOIN, flexbox…</span>
+        <span style="font-family:'Source Code Pro',monospace;font-size:11px;color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.07);border-radius:6px;padding:4px 10px;white-space:nowrap;">Ctrl K</span>
+      </div>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap;" id="search-suggestions">
+        <span class="search-pill" onclick="searchOpenWith('malloc')">malloc</span>
+        <span class="search-pill" onclick="searchOpenWith('pointeur')">pointeur</span>
+        <span class="search-pill" onclick="searchOpenWith('JOIN')">JOIN</span>
+        <span class="search-pill" onclick="searchOpenWith('recursion')">recursion</span>
+        <span class="search-pill" onclick="searchOpenWith('flexbox')">flexbox</span>
+        <span class="search-pill" onclick="searchOpenWith('Big O')">Big O</span>
+        <span class="search-pill" onclick="searchOpenWith('session')">session</span>
+        <span class="search-pill" onclick="searchOpenWith('hash')">hash table</span>
+      </div>
+    </div>
+  </div>
+
   <div class="home-grid">
     <div class="week-card" onclick="showPage('week0')">
       <div class="week-num">0</div>
@@ -1377,6 +1633,42 @@ manger();</div>
     </div>
   </div>
 
+
+  <!-- 10. CODES HTTP FLASK -->
+  <div class="section">
+    <div class="section-title">🚨 10. Codes HTTP & apology() en CS50</div>
+    <div class="card">
+      <p style="font-size:14.5px;margin-bottom:14px;">Flask permet de retourner des codes HTTP spécifiques. Le pattern <code>apology()</code> est utilisé dans CS50 Finance pour afficher les erreurs proprement.</p>
+      <div class="code-block py"><span class="cm"># Retourner un code d'erreur HTTP</span>
+<span class="fn">@app.route</span>(<span class="st">"/secret"</span>)
+<span class="kw">def</span> <span class="fn">secret</span>():
+    <span class="kw">if</span> <span class="st">"user_id"</span> <span class="kw">not in</span> session:
+        <span class="kw">return</span> render_template(<span class="st">"error.html"</span>), <span class="nm">403</span>
+    <span class="kw">return</span> render_template(<span class="st">"secret.html"</span>)
+
+<span class="cm"># Pattern apology() de CS50 Finance</span>
+<span class="kw">def</span> <span class="fn">apology</span>(message, code=<span class="nm">400</span>):
+    <span class="kw">return</span> render_template(<span class="st">"apology.html"</span>,
+                           message=message), code
+
+<span class="cm"># Utilisation dans une route</span>
+<span class="kw">if not</span> nom:
+    <span class="kw">return</span> <span class="fn">apology</span>(<span class="st">"Nom requis"</span>, <span class="nm">400</span>)
+<span class="kw">if</span> solde < <span class="nm">0</span>:
+    <span class="kw">return</span> <span class="fn">apology</span>(<span class="st">"Fonds insuffisants"</span>, <span class="nm">403</span>)</div>
+      <table style="margin-top:14px;">
+        <thead><tr><th>Code</th><th>Signification</th><th>Quand l'utiliser</th></tr></thead>
+        <tbody>
+          <tr><td>200</td><td>OK</td><td>Succès (défaut)</td></tr>
+          <tr><td>400</td><td>Bad Request</td><td>Données manquantes ou invalides</td></tr>
+          <tr><td>403</td><td>Forbidden</td><td>Non connecté ou non autorisé</td></tr>
+          <tr><td>404</td><td>Not Found</td><td>Page ou ressource inexistante</td></tr>
+          <tr><td>500</td><td>Server Error</td><td>Erreur inattendue côté serveur</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- RÉCAP -->
   <div class="section">
     <div class="section-title">🎯 À retenir absolument</div>
@@ -1454,7 +1746,111 @@ manger();</div>
     window._quizStates[QID] = { cur:0, score:0, render, QS };
     render();
   })();
-  </script>
+  
+
+// ── EXPORT / IMPORT PROGRESSION ──
+function exportProgress() {
+  const state = clGetState();
+  const total = clGetTotalItems();
+  const checked = clGetCheckedCount(state);
+  const data = {
+    version: 1,
+    date: new Date().toLocaleDateString('fr-FR'),
+    checked: checked,
+    total: total,
+    progress: state
+  };
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cs50_progression_' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importProgress(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      // Support both formats: direct state or wrapped with version
+      const state = data.progress || data;
+      clSetState(state);
+      // Re-render checklist
+      clRender();
+      floatUpdate();
+      // Show toast
+      const toast = document.getElementById('backupToast');
+      if (toast) {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+    } catch(err) {
+      alert('Fichier invalide — assure-toi d\'importer un fichier .json exporté depuis ce site.');
+    }
+    // Reset input so same file can be re-imported
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+
+// ── EXPORT / IMPORT PROGRESSION ──
+function exportProgress() {
+  const state = clGetState();
+  const total = clGetTotalItems();
+  const checked = clGetCheckedCount(state);
+  const data = {
+    version: 1,
+    date: new Date().toLocaleDateString('fr-FR'),
+    score: checked + '/' + total,
+    progress: state
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cs50_progression_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showSaveToast('✅ Progression sauvegardée !');
+}
+
+function importProgress(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.progress) throw new Error('Format invalide');
+      clSetState(data.progress);
+      clRender();
+      floatUpdate();
+      showSaveToast('✅ Progression restaurée — ' + data.score + ' complétés');
+    } catch(err) {
+      showSaveToast('❌ Fichier invalide', true);
+    }
+  };
+  reader.readAsText(file);
+  // Reset input so same file can be re-imported
+  event.target.value = '';
+}
+
+function showSaveToast(msg, error) {
+  const toast = document.getElementById('saveToast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.style.background = error ? 'var(--crimson)' : 'var(--green)';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+</script>
 
   </main>
 </div>
@@ -1674,7 +2070,90 @@ clang -o hello hello.c -lcs50</div>
       </div>
     </div>
 
+    
     <div class="section">
+      <div class="section-title">🔭 9. Portée des variables (Scope)</div>
+      <div class="card">
+        <p style="font-size:14.5px;margin-bottom:14px;">La <strong>portée</strong> d'une variable définit où elle est accessible dans le code. Une variable déclarée dans un bloc <code>{}</code> n'existe que dans ce bloc.</p>
+        <div class="card-row">
+          <div>
+            <span class="badge red">Locale</span>
+            <div class="code-block" style="margin-top:8px;"><span class="cm">// x n'existe que dans main</span>
+<span class="op">int</span> <span class="f">main</span>(<span class="op">void</span>)
+{
+    <span class="op">int</span> x = <span class="nm">5</span>;
+    <span class="f">printf</span>(<span class="st">"%i"</span>, x); <span class="cm">// OK</span>
+}
+<span class="cm">// x inaccessible ici</span></div>
+          </div>
+          <div>
+            <span class="badge gold">Globale</span>
+            <div class="code-block" style="margin-top:8px;"><span class="cm">// Accessible partout</span>
+<span class="op">int</span> compteur = <span class="nm">0</span>;
+
+<span class="op">void</span> <span class="f">incrementer</span>()
+{
+    compteur++; <span class="cm">// OK</span>
+}
+<span class="op">int</span> <span class="f">main</span>(<span class="op">void</span>)
+{
+    compteur++; <span class="cm">// OK</span>
+}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🔀 10. Switch / case</div>
+      <div class="card">
+        <p style="font-size:14.5px;margin-bottom:14px;">Alternative aux <code>if/else if</code> quand on compare une variable à plusieurs valeurs fixes. Plus lisible dans ce cas.</p>
+        <div class="code-block"><span class="op">int</span> jour = <span class="nm">3</span>;
+<span class="c">switch</span> (jour)
+{
+    <span class="c">case</span> <span class="nm">1</span>:
+        <span class="f">printf</span>(<span class="st">"Lundi\n"</span>);
+        <span class="c">break</span>;
+    <span class="c">case</span> <span class="nm">2</span>:
+        <span class="f">printf</span>(<span class="st">"Mardi\n"</span>);
+        <span class="c">break</span>;
+    <span class="c">case</span> <span class="nm">3</span>:
+        <span class="f">printf</span>(<span class="st">"Mercredi\n"</span>);
+        <span class="c">break</span>;
+    <span class="c">default</span>:
+        <span class="f">printf</span>(<span class="st">"Autre jour\n"</span>);
+}</div>
+        <div class="alert danger"><span class="alert-icon">⚠️</span><span>Le <code>break</code> est <strong>obligatoire</strong> à la fin de chaque case. Sans lui, l'exécution "tombe" dans le case suivant (fall-through).</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📌 11. Constantes — #define & const</div>
+      <div class="card">
+        <div class="card-row">
+          <div>
+            <span class="badge dark">#define</span>
+            <div class="code-block" style="margin-top:8px;"><span class="cm">// Remplacement textuel</span>
+<span class="c">#define</span> PI <span class="nm">3.14159</span>
+<span class="c">#define</span> MAX <span class="nm">100</span>
+
+<span class="cm">// Utilisation</span>
+<span class="op">float</span> aire = PI * r * r;</div>
+          </div>
+          <div>
+            <span class="badge gold">const</span>
+            <div class="code-block" style="margin-top:8px;"><span class="cm">// Variable constante typée</span>
+<span class="op">const int</span> MAX = <span class="nm">100</span>;
+<span class="op">const float</span> PI = <span class="nm">3.14159</span>;
+
+<span class="cm">// Modification impossible</span>
+MAX = <span class="nm">200</span>; <span class="cm">// ERREUR</span></div>
+          </div>
+        </div>
+        <div class="alert tip"><span class="alert-icon">💡</span><span>Préfère <code>const</code> à <code>#define</code> — il respecte les types et aide le compilateur à détecter les erreurs.</span></div>
+      </div>
+    </div>
+<div class="section">
       <div class="section-title">🎯 À retenir</div>
       <div class="card">
         <div class="pills">
@@ -2101,7 +2580,24 @@ notes[<span class="n">2</span>] = <span class="n">99</span>;             <span c
       </div>
     </div>
 
+    
     <div class="section">
+      <div class="section-title">⚖️ 6. Quand utiliser quel algorithme ?</div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Situation</th><th>Algorithme recommandé</th><th>Pourquoi</th></tr></thead>
+          <tbody>
+            <tr><td>Tableau non trié, petite taille</td><td>Recherche linéaire</td><td>Simple, pas besoin de trier</td></tr>
+            <tr><td>Tableau trié, grande taille</td><td>Recherche binaire</td><td>O(log n) — très rapide</td></tr>
+            <tr><td>Trier un petit tableau</td><td>Bubble / Selection sort</td><td>Simple à implémenter</td></tr>
+            <tr><td>Trier un grand tableau</td><td>Merge sort</td><td>O(n log n) garanti</td></tr>
+            <tr><td>Beaucoup de recherches futures</td><td>Trier d'abord, puis binaire</td><td>Investissement rentable</td></tr>
+          </tbody>
+        </table>
+        <div class="alert tip" style="margin-top:14px;"><span class="alert-icon">💡</span><span>Règle générale : si tu fais <strong>une seule recherche</strong> → linéaire. Si tu en fais <strong>beaucoup</strong> → trie d'abord et utilise la binaire.</span></div>
+      </div>
+    </div>
+<div class="section">
       <div class="section-title">🎯 À retenir</div>
       <div class="card">
         <div class="pills">
@@ -2326,7 +2822,28 @@ gdb ./monprogramme</div>
       </div>
     </div>
 
+    
     <div class="section">
+      <div class="section-title">🔤 7. string = char* — Le lien avec la Week 2</div>
+      <div class="card">
+        <p style="font-size:14.5px;margin-bottom:14px;">En CS50, <code>string</code> est juste un alias pour <code>char *</code> — un pointeur vers le premier caractère du tableau. Maintenant que tu connais les pointeurs, ça prend tout son sens.</p>
+        <div class="code-block"><span class="cm">// Ces deux lignes sont identiques !</span>
+<span class="op">string</span> nom = <span class="st">"Alice"</span>;   <span class="cm">// CS50 — alias</span>
+<span class="op">char</span> *nom = <span class="st">"Alice"</span>;   <span class="cm">// C pur — pointeur vers 'A'</span>
+
+<span class="cm">// nom pointe vers le premier caractère</span>
+<span class="cm">// La string en mémoire :</span>
+<span class="cm">// [A][l][i][c][e][\0]</span>
+<span class="cm">//  ↑</span>
+<span class="cm">// nom (l'adresse de 'A')</span>
+
+<span class="f">printf</span>(<span class="st">"%c\n"</span>, *nom);      <span class="cm">// A (déréférencement)</span>
+<span class="f">printf</span>(<span class="st">"%c\n"</span>, *(nom+<span class="nm">1</span>));  <span class="cm">// l</span>
+<span class="f">printf</span>(<span class="st">"%c\n"</span>, nom[<span class="nm">1</span>]);    <span class="cm">// l (identique !)</span></div>
+        <div class="alert tip"><span class="alert-icon">💡</span><span><code>nom[i]</code> et <code>*(nom+i)</code> sont exactement la même chose. L'accès par index est en réalité de l'arithmétique de pointeurs.</span></div>
+      </div>
+    </div>
+<div class="section">
       <div class="section-title">🎯 À retenir</div>
       <div class="card">
         <div class="pills">
@@ -3576,6 +4093,41 @@ db.execute(
     </div>
   </div>
 
+
+  <!-- 9. AUTRES COMMANDES -->
+  <div class="section">
+    <div class="section-title">🔧 9. Autres commandes SQL utiles</div>
+    <div class="card">
+      <div class="code-block sql"><span class="kw">-- Valeurs uniques seulement</span>
+<span class="kw">SELECT DISTINCT</span> ville <span class="kw">FROM</span> etudiants;
+
+<span class="kw">-- Supprimer une table entière (irréversible !)</span>
+<span class="kw">DROP TABLE</span> etudiants;
+
+<span class="kw">-- Ajouter une colonne à une table existante</span>
+<span class="kw">ALTER TABLE</span> etudiants <span class="kw">ADD COLUMN</span> email <span class="tp">TEXT</span>;
+
+<span class="kw">-- Tester si une valeur est nulle</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> etudiants <span class="kw">WHERE</span> email <span class="kw">IS NULL</span>;
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> etudiants <span class="kw">WHERE</span> email <span class="kw">IS NOT NULL</span>;
+
+<span class="kw">-- Recherche partielle</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> etudiants <span class="kw">WHERE</span> nom <span class="kw">LIKE</span> <span class="st">'A%'</span>;   <span class="kw">-- commence par A</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> etudiants <span class="kw">WHERE</span> nom <span class="kw">LIKE</span> <span class="st">'%ice'</span>;  <span class="kw">-- finit par ice</span></div>
+      <table style="margin-top:14px;">
+        <thead><tr><th>Commande</th><th>Rôle</th></tr></thead>
+        <tbody>
+          <tr><td>DISTINCT</td><td>Élimine les doublons dans les résultats</td></tr>
+          <tr><td>DROP TABLE</td><td>Supprime définitivement une table</td></tr>
+          <tr><td>ALTER TABLE</td><td>Modifie la structure d'une table existante</td></tr>
+          <tr><td>IS NULL</td><td>Teste si une valeur est nulle</td></tr>
+          <tr><td>IS NOT NULL</td><td>Filtre les lignes avec valeur non nulle</td></tr>
+        </tbody>
+      </table>
+      <div class="alert danger"><span class="alert-icon">⚠️</span><span><code>DROP TABLE</code> est irréversible — toutes les données sont perdues. Toujours faire une sauvegarde avant.</span></div>
+    </div>
+  </div>
+
   <!-- 9. RÉCAP -->
   <div class="section">
     <div class="section-title">🎯 À retenir absolument</div>
@@ -3999,6 +4551,54 @@ btn.<span class="jfn">addEventListener</span>(<span class="jst">"click"</span>, 
         <span class="prop">grid-template-columns</span>: <span class="cval">repeat(3, 1fr)</span>; <span class="cm">/* 3 colonnes */</span>
     }
 }</div>
+    </div>
+  </div>
+
+
+  <!-- 7. HTTP -->
+  <div class="section">
+    <div class="section-title">🌐 7. HTTP — Codes de statut</div>
+    <div class="card">
+      <p style="font-size:14.5px;margin-bottom:14px;">Chaque réponse HTTP a un <strong>code de statut</strong> qui indique si la requête a réussi ou non. Très utile pour déboguer.</p>
+      <table>
+        <thead><tr><th>Code</th><th>Signification</th><th>Quand</th></tr></thead>
+        <tbody>
+          <tr><td>200 OK</td><td>Succès</td><td>Page trouvée et renvoyée</td></tr>
+          <tr><td>301 / 302</td><td>Redirection</td><td>La page a bougé</td></tr>
+          <tr><td>400</td><td>Bad Request</td><td>Requête mal formée</td></tr>
+          <tr><td>403</td><td>Forbidden</td><td>Accès refusé</td></tr>
+          <tr><td>404</td><td>Not Found</td><td>Page inexistante</td></tr>
+          <tr><td>500</td><td>Server Error</td><td>Erreur côté serveur</td></tr>
+        </tbody>
+      </table>
+      <div class="code-block js" style="margin-top:14px;"><span class="jkw">fetch</span>(<span class="jst">"/api/data"</span>)
+  .then(r => {
+    <span class="jkw">if</span> (!r.ok) <span class="jkw">throw new</span> Error(<span class="jst">"Erreur "</span> + r.status);
+    <span class="jkw">return</span> r.<span class="jfn">json</span>();
+  })
+  .then(data => console.<span class="jfn">log</span>(data))
+  .<span class="jfn">catch</span>(err => console.<span class="jfn">error</span>(err));</div>
+    </div>
+  </div>
+
+  <!-- 8. localStorage -->
+  <div class="section">
+    <div class="section-title">💾 8. localStorage — Sauvegarder dans le navigateur</div>
+    <div class="card">
+      <p style="font-size:14.5px;margin-bottom:14px;"><code>localStorage</code> stocke des données dans le navigateur — elles persistent même après fermeture de l'onglet.</p>
+      <div class="code-block js"><span class="cm">// Stocker</span>
+localStorage.<span class="jfn">setItem</span>(<span class="jst">"nom"</span>, <span class="jst">"Alice"</span>);
+localStorage.<span class="jfn">setItem</span>(<span class="jst">"score"</span>, JSON.<span class="jfn">stringify</span>({pts: <span class="jnm">42</span>}));
+
+<span class="cm">// Lire</span>
+<span class="jkw">const</span> nom = localStorage.<span class="jfn">getItem</span>(<span class="jst">"nom"</span>);
+<span class="jkw">const</span> score = JSON.<span class="jfn">parse</span>(localStorage.<span class="jfn">getItem</span>(<span class="jst">"score"</span>));
+
+<span class="cm">// Supprimer</span>
+localStorage.<span class="jfn">removeItem</span>(<span class="jst">"nom"</span>);
+localStorage.<span class="jfn">clear</span>();</div>
+      <div class="alert tip"><span class="alert-icon">💡</span><span>localStorage ne stocke que des <strong>strings</strong>. Pour des objets, utilise <code>JSON.stringify()</code> pour sauvegarder et <code>JSON.parse()</code> pour lire.</span></div>
+      <div class="alert info"><span class="alert-icon">📌</span><span>sessionStorage fonctionne pareil mais les données sont effacées à la fermeture de l'onglet. localStorage = permanent, sessionStorage = temporaire.</span></div>
     </div>
   </div>
 
@@ -4556,13 +5156,27 @@ flask run --host=0.0.0.0</div>
         <div id="global-bar" style="height:100%;background:linear-gradient(90deg,var(--crimson),var(--gold));border-radius:99px;transition:width 0.4s ease;width:0%;"></div>
       </div>
       <div style="font-family:'Source Code Pro',monospace;font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px;text-align:right;" id="global-pct">0%</div>
-      <div style="margin-top:12px;text-align:right;">
+      <div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div class="backup-bar">
+          <span class="backup-label">💾 Sauvegarde</span>
+          <button class="backup-btn" onclick="exportProgress()">⬇️ Exporter</button>
+          <button class="backup-btn import-btn" onclick="document.getElementById('importFile').click()">⬆️ Importer</button>
+          <input type="file" id="importFile" accept=".json" style="display:none" onchange="importProgress(event)">
+          <span class="backup-toast" id="backupToast">✓ Importé !</span>
+        </div>
         <button onclick="resetAll()" style="background:transparent;border:1.5px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);font-family:'Source Code Pro',monospace;font-size:11px;padding:6px 12px;border-radius:6px;cursor:pointer;">↺ Tout réinitialiser</button>
       </div>
     </div>
   </div>
 
-  <div style="max-width:860px;margin:0 auto;padding:36px 24px 80px;" id="app"></div>
+  <div class="save-bar">
+    <span class="save-label">💾 Sauvegarde</span>
+    <button class="save-btn export" onclick="exportProgress()">↓ Sauvegarder ma progression</button>
+    <button class="save-btn import" onclick="document.getElementById('importFile').click()">↑ Restaurer sur cet appareil</button>
+    <input type="file" id="importFile" accept=".json" onchange="importProgress(event)">
+  </div>
+  <div class="save-toast" id="saveToast"></div>
+  <div style="max-width:860px;margin:0 auto;padding:16px 24px 80px;" id="app"></div>
 </div>
 
 <div class="celebration" id="celebration">
@@ -5074,6 +5688,265 @@ function quizRestart(qid) {
   state.render();
 }
 
+
+// ── RACCOURCIS CLAVIER ──
+const PAGE_ORDER = ['home','week0','week1','week2','week3','week4','week5','week6','week7','week8','week9','checklist'];
+let currentPage = 'home';
+
+const _origShowPage = showPage;
+window.showPage = function(id) {
+  _origShowPage(id);
+  currentPage = id;
+};
+
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const overlay = document.getElementById('searchOverlay');
+  if (overlay && overlay.classList.contains('open')) return;
+
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const idx = PAGE_ORDER.indexOf(currentPage);
+    if (idx === -1) return;
+    const next = e.key === 'ArrowRight'
+      ? PAGE_ORDER[Math.min(idx + 1, PAGE_ORDER.length - 1)]
+      : PAGE_ORDER[Math.max(idx - 1, 0)];
+    if (next !== currentPage) {
+      showPage(next);
+      showNavToast(next, e.key === 'ArrowRight');
+    }
+  }
+});
+
+function showNavToast(pageId, forward) {
+  const old = document.getElementById('nav-toast');
+  if (old) old.remove();
+  const labels = {
+    home:'🏠 Accueil', week0:'Week 0 — Scratch', week1:'Week 1 — C',
+    week2:'Week 2 — Arrays', week3:'Week 3 — Algorithmes',
+    week4:'Week 4 — Mémoire', week5:'Week 5 — Data Structures',
+    week6:'Week 6 — Python', week7:'Week 7 — SQL',
+    week8:'Week 8 — HTML/CSS/JS', week9:'Week 9 — Flask',
+    checklist:'✅ Ma Progression'
+  };
+  const toast = document.createElement('div');
+  toast.id = 'nav-toast';
+  toast.innerHTML = '<span style="opacity:0.6;font-size:14px;">' + (forward ? '→' : '←') + '</span> ' + (labels[pageId] || pageId);
+  toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--dark);color:white;border:1.5px solid var(--gold);border-radius:30px;padding:10px 22px;z-index:600;font-family:Source Code Pro,monospace;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,0.5);white-space:nowrap;';
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.transition = 'opacity 0.3s';
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 300);
+  }, 1200);
+}
+
+
+// ── SEARCH ENGINE ──
+
+// Build search index from all page content
+const SEARCH_INDEX = [];
+
+function buildSearchIndex() {
+  const weeks = [
+    {id:'week0', label:'Week 0 — Scratch'},
+    {id:'week1', label:'Week 1 — C'},
+    {id:'week2', label:'Week 2 — Arrays'},
+    {id:'week3', label:'Week 3 — Algorithmes'},
+    {id:'week4', label:'Week 4 — Mémoire'},
+    {id:'week5', label:'Week 5 — Data Structures'},
+    {id:'week6', label:'Week 6 — Python'},
+    {id:'week7', label:'Week 7 — SQL'},
+    {id:'week8', label:'Week 8 — HTML/CSS/JS'},
+    {id:'week9', label:'Week 9 — Flask'},
+  ];
+
+  weeks.forEach(({id, label}) => {
+    const page = document.getElementById(id);
+    if (!page) return;
+    const sections = page.querySelectorAll('.section');
+    sections.forEach(sec => {
+      const titleEl = sec.querySelector('.section-title');
+      const title = titleEl ? titleEl.textContent.trim() : '';
+      // Get all text content from this section
+      const text = sec.textContent.toLowerCase();
+      // Get all code blocks
+      const codes = Array.from(sec.querySelectorAll('.code-block'))
+        .map(c => c.textContent.trim()).join(' ');
+      // Get all table content
+      const tables = Array.from(sec.querySelectorAll('td,th'))
+        .map(c => c.textContent.trim()).join(' ');
+
+      SEARCH_INDEX.push({
+        weekId: id,
+        weekLabel: label,
+        sectionTitle: title,
+        sectionEl: sec,
+        searchText: (title + ' ' + text + ' ' + codes + ' ' + tables).toLowerCase(),
+        displayTitle: title.replace(/^[\d🔢📦🖨️➕🔀🔁⚙️💻🏗️🔤🛠️🔢💻🎭🔵🐱🌳🗃️🌲🧩⚖️🎯📋🔍⚡🌀📊⚙️💡📊🗺️📦🖼️⚠️🎓📍⚖️🔗🔄🐍📝📦🛠️📚🛡️🌐📄🎨⚡🌳🔌💻🔀📨📄🧪🔐]\.?\s*\d*\.?\s*/, '').trim()
+      });
+    });
+  });
+}
+
+let searchActive = -1;
+let searchMatches = [];
+
+function searchOpenWith(term) {
+  searchOpen();
+  setTimeout(() => {
+    const input = document.getElementById('searchInput');
+    if (input) {
+      input.value = term;
+      searchQuery(term);
+    }
+  }, 80);
+}
+
+function searchOpen() {
+  if (!SEARCH_INDEX.length) buildSearchIndex();
+  document.getElementById('searchOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('searchInput').focus(), 50);
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').innerHTML = '';
+  searchActive = -1;
+}
+
+function searchClose() {
+  document.getElementById('searchOverlay').classList.remove('open');
+}
+
+function searchOverlayClick(e) {
+  if (e.target === document.getElementById('searchOverlay')) searchClose();
+}
+
+function highlight(text, query) {
+  if (!query) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+}
+
+function searchQuery(q) {
+  const results = document.getElementById('searchResults');
+  searchActive = -1;
+  q = q.trim().toLowerCase();
+
+  if (q.length < 2) { results.innerHTML = ''; searchMatches = []; return; }
+
+  // Score each section
+  const scored = SEARCH_INDEX.map(item => {
+    let score = 0;
+    // Title match = highest priority
+    if (item.sectionTitle.toLowerCase().includes(q)) score += 20;
+    // Exact word match
+    const words = item.searchText.split(/\s+/);
+    const matches = words.filter(w => w.includes(q)).length;
+    score += Math.min(matches, 15);
+    return { ...item, score };
+  }).filter(i => i.score > 0)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 12);
+
+  searchMatches = scored;
+
+  if (!scored.length) {
+    results.innerHTML = `<div class="search-empty">Aucun résultat pour "${q}"</div>
+      <div class="search-hint"><span>Essaie : malloc · JOIN · flexbox · recursion · pointer</span></div>`;
+    return;
+  }
+
+  // Group by week
+  const byWeek = {};
+  scored.forEach(item => {
+    if (!byWeek[item.weekId]) byWeek[item.weekId] = { label: item.weekLabel, items: [] };
+    byWeek[item.weekId].items.push(item);
+  });
+
+  let html = '';
+  Object.entries(byWeek).forEach(([wid, group]) => {
+    html += `<div class="search-group">
+      <div class="search-group-label">${group.label}</div>`;
+    group.items.forEach((item, idx) => {
+      const globalIdx = searchMatches.indexOf(item);
+      html += `<div class="search-result-item" id="sri_${globalIdx}"
+                    onclick="searchGo(${globalIdx})"
+                    onmouseenter="searchActivate(${globalIdx})">
+        <span class="sri-week">${item.weekLabel.split('—')[0].trim()}</span>
+        <div class="sri-content">
+          <div class="sri-title">${highlight(item.displayTitle || item.sectionTitle, q)}</div>
+          <div class="sri-section">${item.weekLabel}</div>
+        </div>
+        <span class="sri-arrow">→</span>
+      </div>`;
+    });
+    html += '</div>';
+  });
+
+  html += `<div class="search-hint">
+    <span><kbd>↑↓</kbd> Naviguer</span>
+    <span><kbd>↵</kbd> Ouvrir</span>
+    <span><kbd>ESC</kbd> Fermer</span>
+  </div>`;
+
+  results.innerHTML = html;
+}
+
+function searchActivate(idx) {
+  document.querySelectorAll('.search-result-item').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('sri_' + idx);
+  if (el) el.classList.add('active');
+  searchActive = idx;
+}
+
+function searchGo(idx) {
+  const item = searchMatches[idx];
+  if (!item) return;
+  searchClose();
+  showPage(item.weekId);
+  setTimeout(() => {
+    item.sectionEl.scrollIntoView({behavior:'smooth', block:'center'});
+    const title = item.sectionEl.querySelector('.section-title');
+    if (title) {
+      title.style.transition = 'color 0.3s';
+      title.style.color = 'var(--gold)';
+      setTimeout(() => title.style.color = '', 1800);
+    }
+  }, 120);
+}
+
+function searchKeydown(e) {
+  const total = searchMatches.length;
+  if (!total) return;
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    searchActivate((searchActive + 1) % total);
+    const el = document.getElementById('sri_' + searchActive);
+    if (el) el.scrollIntoView({block:'nearest'});
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    searchActivate((searchActive - 1 + total) % total);
+    const el = document.getElementById('sri_' + searchActive);
+    if (el) el.scrollIntoView({block:'nearest'});
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (searchActive >= 0) searchGo(searchActive);
+    else if (total > 0) searchGo(0);
+  } else if (e.key === 'Escape') {
+    searchClose();
+  }
+}
+
+// Global keyboard shortcut Ctrl+K or Cmd+K
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    searchOpen();
+  }
+  if (e.key === 'Escape') searchClose();
+});
+
+
+
 </script>
 
 <!-- ── FLOATING PROGRESS ── -->
@@ -5097,6 +5970,23 @@ function quizRestart(qid) {
   <div class="float-text">
     <div class="float-label">Progression</div>
     <div class="float-count" id="floatCount">0 / 0</div>
+  </div>
+</div>
+
+
+<!-- ── SEARCH OVERLAY ── -->
+<div class="search-overlay" id="searchOverlay" onclick="searchOverlayClick(event)">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput"
+             placeholder="Chercher un concept… malloc, JOIN, flexbox, recursion…"
+             oninput="searchQuery(this.value)"
+             onkeydown="searchKeydown(event)"
+             autocomplete="off" spellcheck="false">
+      <button class="search-close" onclick="searchClose()">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
   </div>
 </div>
 
