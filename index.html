@@ -5450,7 +5450,7 @@ function clRender() {
 
     const items = week.items.map(item => `
       <div class="item-cl${state[item.id] ? ' checked' : ''}" id="clitem-${item.id}"
-           onclick="clToggleItem('${item.id}', ${JSON.stringify(week.num)})">
+           onclick="clToggleItem('${item.id}', '${week.num}')">
         <div class="chkbox">
           <span class="chktick">✓</span>
         </div>
